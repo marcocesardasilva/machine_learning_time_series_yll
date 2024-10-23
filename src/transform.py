@@ -1,6 +1,6 @@
 import os
+import re
 import pandas as pd
-# import basedosdados as bd
 
 
 def calculate_life_expectancy(age):
@@ -46,6 +46,18 @@ def calculate_life_expectancy(age):
     else:
         return 7.05
 
+def create_population_df(file_path):
+    # Create population dataframe
+    file_population = 'ibge_cnv_poptbr000433187_65_254_204.csv'
+    df = pd.read_csv(os.path.join(file_path, file_population), skiprows=3, sep=';', encoding='ISO-8859-1', low_memory=False)
+    index_total = df[df['Município'] == 'Total'].index[0]
+    df = df.loc[:index_total-1]
+    # Creating the cod_municipio column with the first 6 characters of the Municipio column
+    df['id_municipio'] = df['Município'].str[:6]
+    # Transforming column years into rows with corresponding population values
+    df = pd.melt(df, id_vars=['id_municipio'], value_vars=[str(year) for year in range(2010, 2020)],var_name='ano', value_name='populacao')
+    return df
+
 def create_df(data_folder_raw):
     # Select the folder where the raw files are located
     current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -69,8 +81,9 @@ def create_df(data_folder_raw):
     print("--------------------------------------------------------------------------")
     print("Carregando os dados dos arquivos extraídos, tratando e concatenando...")
     # Generate the dataframe
+    pattern = r'^Mortalidade_Geral_\d{4}\.csv$'
     for file in os.listdir(file_path):
-        if file.endswith('.csv'):
+        if re.match(pattern, file):
             # Read CSV file with Pandas
             df = pd.read_csv(os.path.join(file_path, file), delimiter=';', encoding='ISO-8859-1', low_memory=False)
             # Analyze whether the ICD-10 code belongs to ICSAPs
@@ -94,25 +107,19 @@ def create_df(data_folder_raw):
             df['quad_obito'] = pd.cut(df['dt_obito'].dt.month, bins=[1, 5, 9, 13], labels=[1, 2, 3], right=False)
             # Extract the first 6 digits from the CODMUNRES column
             df['cd_mun_res'] = df['CODMUNRES'].astype(str).str.slice(stop=6)
-            # Renomear colunas
+            # Rename columns
             df = df.rename(columns={'CAUSABAS':'cid10'})
             # Select desired columns
             df = df[['ano_obito','quad_obito','dt_obito','dt_nasc','idade','yll','cid10','cd_mun_res']]
             # Add the dataframe to the list of dataframes
             dfs.append(df)
 
-    # concatena os dataframes em um único dataframe final
+    # Concatenate the dataframes into a single final dataframe
     df_group = pd.concat(dfs, ignore_index=True)
-    # Baixa a base de população por município
-    df_download = bd.read_table(dataset_id='br_ms_populacao',table_id='municipio',billing_project_id="ml-na-saude")
-    # Agrupa apenas as colunas desejadas
-    df_populacao = df_download.groupby(['ano', 'id_municipio'])['populacao'].sum().reset_index()
-    # Transformar id_municipio para apenas 6 digitos
-    df_populacao['id_municipio'] = df_populacao['id_municipio'].astype(str).str[:6]
-    # Alterar tipo de dados do ano
-    df_populacao['ano'] = df_populacao['ano'].astype(str)
+    # Create population dataframe
+    population_df = create_population_df(file_path)
     # Merge os dataframes com base nas condições especificadas
-    df_yll = df_group.merge(df_populacao, how='left', left_on=['ano_obito', 'cd_mun_res'], right_on=['ano', 'id_municipio'])
+    df_yll = df_group.merge(population_df, how='left', left_on=['ano_obito', 'cd_mun_res'], right_on=['ano', 'id_municipio'])
     # Drop das colunas desnecessárias após a junção
     df_yll.drop(['ano', 'id_municipio'], axis=1, inplace=True)
 

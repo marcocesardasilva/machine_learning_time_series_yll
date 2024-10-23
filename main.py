@@ -7,8 +7,7 @@ from src.transform import *
 def main():
 
     # ACCESS SETTINGS
-    file_key, dataset, data_folder_raw, data_folder_processed, \
-    starting_year, final_year = config()
+    file_key, dataset, data_folder_raw, data_folder_processed, starting_year, final_year = config()
 
     # CONNECT TO GCP
     client = connect_to_gcp(file_key)
@@ -22,8 +21,8 @@ def main():
     # EXTRACT
     download_files(data_folder_raw, starting_year, final_year)
 
-    # TRANSFORM
-    df_yll = create_df(data_folder_raw)
+    # # TRANSFORM
+    # df_yll = create_df(data_folder_raw)
 
     # # LOAD
     # tables_dfs = {table_yll:df_yll} 
