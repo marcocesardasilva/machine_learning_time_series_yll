@@ -1,0 +1,7 @@
+variables:
+  file_key: 'keys/ml-na-saude-ed1fc3c1a83e.json'
+  dataset: 'yll_por_obito'
+  data_folder_raw: 'pipeline/data/raw'
+  data_folder_processed: 'pipeline/data/processed'
+  starting_year: 2010
+  final_year: 2025
