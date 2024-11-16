@@ -9,6 +9,7 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.stattools import acf
 import scipy.stats as stats
 
+
 # Realizar conexão com o GCP
 credentials = service_account.Credentials.from_service_account_file("keys/ml-na-saude-ed1fc3c1a83e.json")
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)

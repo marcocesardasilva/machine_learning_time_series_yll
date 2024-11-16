@@ -9,8 +9,9 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, mean_absolu
 from prophet import Prophet
 import scipy.stats as stats
 
+
 # Realizar conexão com o GCP
-credentials = service_account.Credentials.from_service_account_file("../keys/ml-na-saude-ed1fc3c1a83e.json")
+credentials = service_account.Credentials.from_service_account_file("keys/ml-na-saude-ed1fc3c1a83e.json")
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
 # Query para consulta dos dados agrupados por taxa média por quadrimestre
