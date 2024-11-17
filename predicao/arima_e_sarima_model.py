@@ -177,7 +177,7 @@ plt.fill_between(future_forecast_arima.index,
                  lower_bound_80, upper_bound_80,
                  color='blue', alpha=0.3, label='IC 80%')
 
-plt.title('Previsão Taxa Média YLL - Utilizando Modelo ARIMA')
+plt.title('Predição Taxa Média YLL - Utilizando Modelo ARIMA')
 plt.ylabel('Taxa Média YLL')
 plt.xlabel('Quadrimestre')
 plt.legend()
@@ -300,7 +300,7 @@ plt.fill_between(sarima_future_forecast.index,
                  lower_bound_80, upper_bound_80,
                  color='blue', alpha=0.3, label='IC 80%')
 
-plt.title('Previsão Taxa Média YLL - Utilizando Modelo SARIMA')
+plt.title('Predição Taxa Média YLL - Utilizando Modelo SARIMA')
 plt.ylabel('Taxa Média YLL')
 plt.xlabel('Quadrimestre')
 plt.legend()

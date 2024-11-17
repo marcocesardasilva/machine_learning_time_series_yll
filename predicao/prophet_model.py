@@ -118,7 +118,7 @@ plt.fill_between(test_forecast_80['ds'],
                 test_forecast_80['yhat_upper'],
                 color='blue', alpha=0.3, label='IC 80%')
 
-plt.title('Previsão Taxa Média YLL - Utilizando Modelo Prophet')
+plt.title('Predição Taxa Média YLL - Utilizando Modelo Prophet')
 plt.ylabel('Taxa Média YLL')
 plt.xlabel('Quadrimestre')
 plt.legend()

@@ -120,7 +120,7 @@ plt.fill_between(test['quadrimestre'],
                  predictions + 1.28*np.std(predictions),
                  color='blue', alpha=0.3, label='IC 80%')
 
-plt.title('Previsão Taxa Média YLL - Utilizando Modelo XGBoost')
+plt.title('Predição Taxa Média YLL - Utilizando Modelo XGBoost')
 plt.ylabel('Taxa Média YLL')
 plt.xlabel('Quadrimestre')
 plt.legend()
