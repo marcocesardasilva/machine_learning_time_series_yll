@@ -256,7 +256,7 @@ plt.fill_between(train_results_val.index, lower_bound_95_v, upper_bound_95_v, co
 plt.fill_between(train_results_val.index, lower_bound_80_v, upper_bound_80_v, color='blue', alpha=0.3, label=None)
 
 # Adicionar título e legendas
-plt.title('Previsão da Taxa Média YLL com Intervalos de Confiança (Modelo 2)')
+plt.title('Predição da Taxa Média YLL com Intervalos de Confiança (Modelo 2)')
 plt.ylabel('Taxa Média YLL')
 plt.xlabel('Ano')
 plt.legend()
