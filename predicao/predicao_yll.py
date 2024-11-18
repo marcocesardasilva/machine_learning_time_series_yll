@@ -147,3 +147,7 @@ plt.ylabel('Taxa Média YLL')
 plt.xlabel('Ano')
 plt.legend()
 plt.show()
+
+# Salvar o modelo LSTM treinado em formato .h5
+model.save('models/lstm_model.h5')
+print("Modelo salvo como 'lstm_model.h5'")

@@ -1,17 +1,31 @@
-# Modelo preditivo dos anos de vida perdidos por morte prematura para os municípios brasileiros de médio e grande porte utilizando aprendizagem de máquina
+# Modelo preditivo dos anos de vida perdidos por morte prematura para os municípios brasileiros de médio porte utilizando aprendizagem de máquina
 
-Projeto de avaliação de modelos preditivos dos anos de vida perdidos por morte prematura para os municípios brasileiros de médio e grande porte, utilizando aprendizagem de máquina.
+Projeto de avaliação de modelos preditivos dos anos de vida perdidos por morte prematura para os municípios brasileiros de médio porte, utilizando aprendizagem de máquina.
 
-Ativar venv: venv\Scripts\activate
+O projeto é composto por duas fazes, uma com atividades de Enganharia de Dados e outra puramente de Ciência de Dados.
 
-Gerar requirements: pip freeze > requirements.txt
+Como resultados são obtidas as previsões dos índices de taxa média do YLL (anos de vida perdidos por morte prematura).
 
-Necessário a pasta keys com o arquivo json gerado no GCP
+#
+
+Ativar o ambiente virtual:
+```
+venv\Scripts\activate
+```
+Gerar requirements:
+```
+pip freeze > requirements.txt
+```
+Observação: É necessária a pasta keys com o arquivo json gerado no GCP.
+
+Abaixo é apresentada a estrutura de tópicos do projeto:
 
 ```
 machine_learning_time_series_yll
 ├── keys
 │   ├── nome_projeto_gcp.json
+├── models
+│   ├── lstm_model.h5
 ├── pipeline
 │   ├── data
 │   │   ├── processed
@@ -30,14 +44,22 @@ machine_learning_time_series_yll
 │   │   ├── transform.py
 │   ├── main.py
 ├── predicao
-│   ├── an_exp.ipynb
+│   ├── arima_e_sarima_model.ipynb
+│   ├── arima_e_sarima_model.py
 │   ├── exploratory_analysis.ipynb
-│   ├── modeling.ipynb
-│   ├── nb_etl.ipynb
+│   ├── exploratory_analysis.py
+│   ├── lstm_model.ipynb
+│   ├── lstm_model.py
+│   ├── predicao_yll.ipynb
+│   ├── predicao_yll.py
+│   ├── prophet_model.ipynb
+│   ├── prophet_model.py
+│   ├── query.sql
+│   ├── xgboost_model.ipynb
+│   ├── xgboost_model.py
 ├── .gitignore
 ├── config.yaml
 ├── README.md
 ├── requirements.txt
 ```
 
-teste
