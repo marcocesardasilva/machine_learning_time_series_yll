@@ -4,4 +4,4 @@ variables:
   data_folder_raw: 'pipeline/data/raw'
   data_folder_processed: 'pipeline/data/processed'
   starting_year: 2010
-  final_year: 2025
+  final_year: 2026
